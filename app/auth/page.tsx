@@ -1,17 +1,30 @@
 "use client"
 import Input from "@/components/input";
 import { useCallback, useState } from "react";
+import axios from "axios";
 
 const AuthPage = () => {
   
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState(''); 
   const [variant, setVariant] = useState('login');
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login');
   }, [])
+
+  const register = useCallback(async () => {
+      try{
+        await axios.post('/api/register', {
+          email, 
+          name, 
+          password
+        })
+      } catch(error){
+        console.error(error);
+      }
+  }, [email, name, password])
   
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover bg-fixed">
@@ -30,8 +43,8 @@ const AuthPage = () => {
                   <Input 
                 id="username"
                 label="User"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 />
 
               )}
@@ -50,7 +63,7 @@ const AuthPage = () => {
               value={password}
               />
             </div>
-            <button className="bg-red-600 py-3 text-white w-full cursor-pointer hover:bg-red-700 transition mt-10 rounded-md">
+            <button onClick={register} className="bg-red-600 py-3 text-white w-full cursor-pointer hover:bg-red-700 transition mt-10 rounded-md">
               {variant === 'login' ? 'Login' : 'Register'}
             </button>
             <p className="text-neutral-500 mt-12">
