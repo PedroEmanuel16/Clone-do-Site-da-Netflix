@@ -1,6 +1,20 @@
+import Billboard from "@/components/billboard";
+import NavBar from "@/components/navbar";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+
+export default async function Home() {
+  const session = await getServerSession();
+
+  if (!session) {
+    redirect('/auth');
+  }
+
   return (
-    <h1 className="text-red-800">Hello</h1>
+    <>
+    <NavBar />
+    <Billboard />
+    </>
   );
 }
