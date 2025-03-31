@@ -2,10 +2,10 @@ import { db } from "@/lib/prismadb";
 import { without } from "lodash";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
     const session = await getServerSession();
 
     if (!session) {
@@ -49,7 +49,7 @@ export async function POST(request) {
 }
 
 
-export async function DELETE(request) {
+export async function DELETE(request: NextRequest) {
     const session = await getServerSession();
 
     if (!session) {

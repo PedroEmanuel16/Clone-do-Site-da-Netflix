@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { redirect } from "next/navigation";
 import { db } from "@/lib/prismadb";
 import { getServerSession } from "next-auth";
 

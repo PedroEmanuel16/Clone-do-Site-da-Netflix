@@ -1,10 +1,10 @@
 import { db } from "@/lib/prismadb";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(request) {
+export async function GET(request: NextRequest) {
   const session = await getServerSession();
   
   if (!session) {
@@ -35,7 +35,7 @@ export async function GET(request) {
 
     return NextResponse.json(movie);
 
-  } catch (error) {
-    return new Response(error, { status: 500 });
+  } catch  {
+    return new Response('error', { status: 500 });
   }
 }

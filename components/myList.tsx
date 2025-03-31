@@ -23,6 +23,7 @@ const MyList = ({ title}: MyListProps) => {
                     {title}
                 </p>
                 <div className="grid grid-cols-4 gap-2">
+                    {/* @ts-expect-error-any*/}
                     {data.map((movie) => (
                         <MovieCard key={movie.id} data={movie} />
                     ))}
