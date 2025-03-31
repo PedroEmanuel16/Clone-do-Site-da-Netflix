@@ -100,8 +100,8 @@ const InfoModal = () => {
                                 {data?.title}
                             </p>
                             <div className="flex flex-row gap-4 items-center">
-                                <PlayButton movieId={data?.movieId} />
-                                <FavoriteButton movieId={data?.movieId} />
+                                <PlayButton movieId={data?.id} />
+                                <FavoriteButton movieId={data?.id} />
                             </div>
                         </div>
                     </div>
@@ -111,13 +111,13 @@ const InfoModal = () => {
                             New
                         </p>
 
-                        <p className="text-white text-lg">
+                        <p className="text-white text-lg py-2">
                             {data?.duration}
                         </p>
-                        <p className="text-white text-lg">
+                        <p className="text-white text-lg py-2">
                             {data?.genre}
                         </p>
-                        <p className="text-white text-lg">
+                        <p className="text-white text-lg py-2">
                             {data?.description}
                         </p>
                     </div>
