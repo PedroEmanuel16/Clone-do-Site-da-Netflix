@@ -58,7 +58,7 @@ const authOptions = {
 };
 
 // Criando um handler de autenticação
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 
 // Exportando o handler para as rotas GET e POST
 export { handler as GET, handler as POST };
