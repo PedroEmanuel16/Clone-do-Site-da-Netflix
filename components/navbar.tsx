@@ -52,6 +52,7 @@ const NavBar = () => {
                 duration-500
                 ${showBackground ? `bg-zinc-900/90` : ``}
             `}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className="h-6 lg:h-8" src="/images/logo.png" alt="logo" />
                 <div className="
                     flex-row ml-8 gap-7 hidden lg:flex
@@ -86,6 +87,7 @@ const NavBar = () => {
                     </div>
                     <div onClick={toggleAccountMenu} className="flex flex-row items-center gap-2 cursor-pointer relative">
                         <div className="h-6 w-6 lg:h-10 lg:w-10 rounded-md overflow-hidden">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src="/images/perfil.png" alt="" />
                         </div>
                         <BsChevronDown className={`text-white transition ${showAccountMenu ? 'rotate-180' : ''}`} />

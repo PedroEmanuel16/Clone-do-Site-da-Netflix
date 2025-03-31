@@ -7,6 +7,7 @@ import useInfoModal from "@/hooks/useInfoModal";
 import { BiChevronDown } from "react-icons/bi";
 
 interface MovieCardProps{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: Record<string, any>
 }
 
@@ -17,6 +18,7 @@ const MovieCard = ({data}: MovieCardProps) => {
 
     return (
         <div className="group bg-zinc-900 col-span-1 relative h-[12vw]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img onClick={() => openModal(data?.id)} className="
             cursor-pointer
             object-cover
@@ -51,6 +53,7 @@ const MovieCard = ({data}: MovieCardProps) => {
             group-hover:opacity-100
             "
             >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={data.thumbnailUrl} alt="thumbnail" className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-[12vw]" />
 
                 <div

@@ -29,7 +29,7 @@ export async function GET() {
         });
 
         return NextResponse.json(randomMovies[0]);
-  } catch (error) {
+  } catch {
     return new Response('Error', { status: 500 });
   }
 }
