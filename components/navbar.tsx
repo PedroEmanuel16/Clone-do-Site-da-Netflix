@@ -52,7 +52,7 @@ const NavBar = () => {
                 duration-500
                 ${showBackground ? `bg-zinc-900/90` : ``}
             `}>
-                <img className="h-4 lg:h-8" src="/images/logo.png" alt="logo" />
+                <img className="h-6 lg:h-8" src="/images/logo.png" alt="logo" />
                 <div className="
                     flex-row ml-8 gap-7 hidden lg:flex
                 ">

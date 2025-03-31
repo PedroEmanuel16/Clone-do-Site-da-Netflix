@@ -1,5 +1,6 @@
 'use client'
 
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { signOut } from "next-auth/react";
 
 interface AccountMenuProps {
@@ -7,6 +8,8 @@ interface AccountMenuProps {
 }
 
 const AccountMenu = ({ visible }: AccountMenuProps) => {
+
+    const {data} = useCurrentUser();
 
     if(!visible){
         return null;
@@ -19,7 +22,7 @@ const AccountMenu = ({ visible }: AccountMenuProps) => {
                     <img className="w-8 rounded-md" src="/images/perfil.png" alt="perfil" />
                     <p className="text-white text-sm group-hover/item:underline
                     ">
-                        Username
+                        {data?.name}
                     </p>
                 </div>
                 <hr className="bg-gray-600 border-0 h-px my-4" />
