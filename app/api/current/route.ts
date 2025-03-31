@@ -1,4 +1,3 @@
-import serverAuth from "@/lib/serverAuth";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/prismadb";
