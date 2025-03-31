@@ -37,7 +37,7 @@ export async function POST(request) {
         })
 
         return NextResponse.json(user);
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return new Response('Error', { status: 500 });
     }
@@ -81,6 +81,7 @@ export async function DELETE(request) {
         })
 
         return NextResponse.json(updatedUser);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return new Response('Error', { status: 500 });
     }
