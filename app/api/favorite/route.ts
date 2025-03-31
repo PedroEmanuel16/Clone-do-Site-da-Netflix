@@ -25,6 +25,11 @@ export async function POST(request) {
             throw new Error('Invalid Id');
         }
 
+        if (!session || !session.user?.email) {
+        // Retornar erro 401 se o usuário não estiver autenticado
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const user = await db.user.update({
             where: {
                 email: session.user?.email,
@@ -51,6 +56,11 @@ export async function DELETE(request) {
         redirect('/auth');
     }
 
+    if (!session || !session.user?.email) {
+      // Retornar erro 401 se o usuário não estiver autenticado
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     try {
         const { movieId } = await request.json();
         const currentUser = await db.user.findUnique({
@@ -70,6 +80,11 @@ export async function DELETE(request) {
         }
 
         const updatedFavoriteIds = without(currentUser?.faveriteIds, movieId);
+
+        if (!session || !session.user?.email) {
+        // Retornar erro 401 se o usuário não estiver autenticado
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
 
         const updatedUser = await db.user.update({
             where: {

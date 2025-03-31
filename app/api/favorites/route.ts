@@ -11,7 +11,14 @@ export async function GET() {
         redirect('/auth');
     }
 
+    if (!session || !session.user?.email) {
+      // Retornar erro 401 se o usuário não estiver autenticado
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     try {
+
+
         const user = await db.user.findUnique({
             where: {
                 email: session.user?.email,
