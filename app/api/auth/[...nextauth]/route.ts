@@ -6,13 +6,13 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google'; 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-// Configuração do NextAuth
-export const authOptions = {
+// A configuração do NextAuth
+const authOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || ''
-    }), 
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
@@ -57,6 +57,8 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-// Exportando os manipuladores GET e POST
-const handler = NextAuth(authOptions);
+// Criando um handler de autenticação
+export const handler = NextAuth(authOptions);
+
+// Exportando o handler para as rotas GET e POST
 export { handler as GET, handler as POST };
