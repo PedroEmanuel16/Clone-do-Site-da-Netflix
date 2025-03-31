@@ -32,7 +32,7 @@ export async function GET() {
 
         return NextResponse.json(favoriteMovies);
 
-    } catch (error) {
+    } catch  {
         return new Response('Error', { status: 500 });
     }
 }

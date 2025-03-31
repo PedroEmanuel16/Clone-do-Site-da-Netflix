@@ -16,7 +16,7 @@ export async function GET() {
         const movies = await db.movie.findMany();
 
         return NextResponse.json(movies);
-  } catch (error) {
+  } catch {
     return new Response('Error fetching movie', { status: 500 });
   }
 }
