@@ -6,6 +6,7 @@ import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google'; 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
+// Configuração do NextAuth
 export const authOptions = {
   providers: [
     GithubProvider({
@@ -56,5 +57,6 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
+// Exportando os manipuladores GET e POST
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
