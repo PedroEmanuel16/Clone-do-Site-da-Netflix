@@ -6,9 +6,17 @@ interface InputProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   label: string;
+  disabled?: boolean; // Adicionando a prop disabled como opcional
 }
 
-const Input = ({ id, type, value, onChange, label }: InputProps) => {
+const Input = ({
+  id,
+  type,
+  value,
+  onChange,
+  label,
+  disabled = false,
+}: InputProps) => {
   return (
     <div className="relative">
       <input
@@ -16,7 +24,8 @@ const Input = ({ id, type, value, onChange, label }: InputProps) => {
         type={type}
         id={id}
         value={value}
-        className="
+        disabled={disabled}
+        className={`
             block
             rounded-md
             px-6
@@ -31,12 +40,13 @@ const Input = ({ id, type, value, onChange, label }: InputProps) => {
             focus:outline-none
             focus:ring-0
             peer
-            "
+            ${disabled && "opacity-50 cursor-not-allowed"}
+        `}
         placeholder=" "
       />
       <label
         htmlFor={id}
-        className="
+        className={`
             absolute
             text-base
             text-zinc-400
@@ -52,7 +62,8 @@ const Input = ({ id, type, value, onChange, label }: InputProps) => {
             peer-placeholder-shown:translate-y-0
             peer-focus:scale-75
             peer-focus:-translate-y-3
-            "
+            ${disabled && "opacity-50"}
+        `}
       >
         {label}
       </label>
