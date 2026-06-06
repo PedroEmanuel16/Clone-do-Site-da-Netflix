@@ -223,7 +223,7 @@ const AuthPage = () => {
             </button>
 
             <div className="flex flex-row items-center justify-center gap-4 mt-8">
-              <div
+              {/* <div
                 onClick={() => !isLoading && handleSocialLogin("google")}
                 className={`
                   w-10 h-10 bg-white rounded-full flex items-center justify-center 
@@ -232,7 +232,7 @@ const AuthPage = () => {
                 `}
               >
                 <FcGoogle size={30} />
-              </div>
+              </div> */}
               <div
                 onClick={() => !isLoading && handleSocialLogin("github")}
                 className={`
