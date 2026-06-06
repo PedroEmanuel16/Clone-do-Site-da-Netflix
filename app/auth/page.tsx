@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLoading } from "react-icons/ai";
 
 // Interface para o erro da API
