@@ -1,11 +1,17 @@
 "use client";
 import Input from "@/components/input";
 import { useCallback, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLoading } from "react-icons/ai";
+
+// Interface para o erro da API
+interface ApiErrorResponse {
+  message?: string;
+  error?: string;
+}
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
@@ -19,11 +25,10 @@ const AuthPage = () => {
     setVariant((currentVariant) =>
       currentVariant === "login" ? "register" : "login",
     );
-    setError(null); // Limpa erro ao trocar de variante
+    setError(null);
   }, []);
 
   const login = useCallback(async () => {
-    // Validação básica
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
@@ -37,7 +42,7 @@ const AuthPage = () => {
         email,
         password,
         callbackUrl: "/profiles",
-        redirect: false, // Impede redirecionamento automático para tratar erro
+        redirect: false,
       });
 
       if (result?.error) {
@@ -47,7 +52,6 @@ const AuthPage = () => {
       }
 
       if (result?.ok) {
-        // Redirecionamento manual após sucesso
         window.location.href = "/profiles";
       }
     } catch (error) {
@@ -58,7 +62,6 @@ const AuthPage = () => {
   }, [email, password]);
 
   const register = useCallback(async () => {
-    // Validações do formulário
     if (!email || !password || !name) {
       setError("Please fill in all fields");
       return;
@@ -84,16 +87,24 @@ const AuthPage = () => {
         password,
       });
 
-      // Auto-login após registro bem-sucedido
       await login();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Registration error:", error);
 
-      // Tratamento de erros específicos do backend
-      if (error.response?.status === 409) {
-        setError("Email already exists. Please login instead.");
-      } else if (error.response?.status === 400) {
-        setError(error.response?.data?.message || "Invalid registration data");
+      // Tratamento tipado para erro do axios
+      if (error instanceof AxiosError) {
+        const status = error.response?.status;
+        const data = error.response?.data as ApiErrorResponse;
+
+        if (status === 409) {
+          setError("Email already exists. Please login instead.");
+        } else if (status === 400) {
+          setError(data?.message || data?.error || "Invalid registration data");
+        } else {
+          setError("Registration failed. Please try again.");
+        }
+      } else if (error instanceof Error) {
+        setError(error.message);
       } else {
         setError("Registration failed. Please try again.");
       }
@@ -138,7 +149,6 @@ const AuthPage = () => {
 
         <div className="flex justify-center px-4 sm:px-6">
           <div className="bg-black/80 px-6 sm:px-8 md:px-16 py-8 sm:py-12 md:py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
-            {/* Exibição de erro */}
             {error && (
               <div className="mb-6 p-3 bg-red-500/20 border border-red-500 rounded-md">
                 <p className="text-red-500 text-sm text-center">{error}</p>
